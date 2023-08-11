@@ -1,11 +1,9 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
     @Test
-
     public void testRoundPlayer1Wins() {
         Game game = new Game();
         Player player1 = new Player(1, "Player 1", 10);
@@ -58,12 +56,9 @@ class GameTest {
         Player player1 = new Player(1, "Player 1", 10);
         game.register(player1);
 
-        try {
+        assertThrows(NotRegisteredException.class, () -> {
             game.round("Player 1", "Player 2");
-            fail("Expected NotRegisteredException to be thrown");
-        } catch (NotRegisteredException e) {
-            assertEquals("Both players must be registered", e.getMessage());
-        }
+        });
     }
 
     @Test
@@ -72,24 +67,17 @@ class GameTest {
         Player player2 = new Player(1, "Player 1", 10);
         game.register(player2);
 
-        try {
+        assertThrows(NotRegisteredException.class, () -> {
             game.round("Player 1", "Player 2");
-            fail("Expected NotRegisteredException to be thrown");
-        } catch (NotRegisteredException e) {
-            assertEquals("Both players must be registered", e.getMessage());
-        }
+        });
     }
 
     @Test
     public void testRoundPlayersNotRegisteredException() {
         Game game = new Game();
 
-        try {
+        assertThrows(NotRegisteredException.class, () -> {
             game.round("Player 1", "Player 2");
-            fail("Expected NotRegisteredException to be thrown");
-        } catch (NotRegisteredException e) {
-            assertEquals("Both players must be registered", e.getMessage());
-        }
+        });
     }
-
 }
